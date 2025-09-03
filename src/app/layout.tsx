@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -35,7 +35,7 @@ export default function RootLayout({
         <section>
           <Container>
             <SideBar />
-            <div className="flex w-full justify-center">
+            <div className="flex w-full">
               <main>{children}</main>
             </div>
           </Container>
