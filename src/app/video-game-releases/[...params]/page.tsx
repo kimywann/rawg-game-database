@@ -30,7 +30,6 @@ const getMonthName = (month: number): string => {
 const ReleaseCalendarMonthPage = async ({
   params,
 }: ReleaseCalendarMonthPageProps) => {
-  // params를 await로 기다리기
   const resolvedParams = await params;
 
   // URL이 /video-game-releases/2025-9 형태로 오면 params.params = ["2025-9"]
@@ -67,11 +66,11 @@ const ReleaseCalendarMonthPage = async ({
           <MonthNavigation currentYear={year} currentMonth={month} />
 
           <section className="w-full">
-            {games.length > 0 ? (
-              <GameList games={games} />
+            {games.results.length > 0 ? (
+              <GameList games={games.results} />
             ) : (
               <div className="py-12 text-center text-gray-400">
-                <p className="text-xl">이 달에 출시 예정인 게임이 없습니다.</p>
+                <p>이 달에 출시된 게임이 없습니다.</p>
               </div>
             )}
           </section>
