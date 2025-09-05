@@ -45,5 +45,5 @@ src/
 - **Tailwind CSS**
 - **TanStack Query**
 - **Axios**
-- RAWG API
-- Vercel
+- **RAWG API**
+- **Vercel**
