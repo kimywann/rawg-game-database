@@ -8,9 +8,10 @@ import { getUniquePlatformGroups } from "@/utils/platformMapping";
 
 interface GameCardProps {
   game: Game;
+  priority?: boolean;
 }
 
-const GameCard = ({ game }: GameCardProps) => {
+const GameCard = ({ game, priority = false }: GameCardProps) => {
   return (
     <li className="mx-auto mb-6 flex w-full max-w-80 flex-col overflow-hidden rounded-lg bg-zinc-800 transition-all duration-300 hover:scale-105">
       <div className="relative h-40 w-80 overflow-hidden">
@@ -20,6 +21,7 @@ const GameCard = ({ game }: GameCardProps) => {
             alt={game.name}
             fill
             className="object-cover"
+            priority={priority}
             sizes="320px"
           />
         ) : (

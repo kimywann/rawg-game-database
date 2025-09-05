@@ -34,8 +34,8 @@ const GameList = ({ games }: GameListProps) => {
     <div ref={containerRef} className="flex gap-4">
       {columns.map((columnGames, columnIndex) => (
         <div key={columnIndex} className="flex-1 space-y-4">
-          {columnGames.map((game) => (
-            <GameCard key={game.id} game={game} />
+          {columnGames.map((game, gameIndex) => (
+            <GameCard key={game.id} game={game} priority={gameIndex < 5} />
           ))}
         </div>
       ))}
