@@ -17,39 +17,23 @@ const SideBar = () => {
         >
           Home
         </Link>
-        <Link
-          href="/reviews/popular"
-          className="text-xl font-bold transition-colors hover:text-zinc-400"
-        >
-          Reviews
-        </Link>
         <div>
           <section>
             <span className="text-xl font-bold">New Releases</span>
             <ul className="mt-3 flex flex-col">
               <li>
-                <div className="flex cursor-pointer items-center gap-3 rounded-md p-2 transition-colors hover:bg-gray-700">
-                  <Image
-                    src={lastMonth}
-                    alt="last-30-days"
-                    className="h-8 w-8 flex-shrink-0 rounded-md bg-zinc-600 p-1"
-                  />
-                  <span className="whitespace-nowrap text-gray-200">
-                    Last 30 days
-                  </span>
-                </div>
-              </li>
-              <li>
-                <div className="flex cursor-pointer items-center gap-3 rounded-md p-2 transition-colors hover:bg-gray-700">
-                  <Image
-                    src={releaseCalendar}
-                    alt="release-calendar"
-                    className="h-8 w-8 flex-shrink-0 rounded-md bg-zinc-600 p-1"
-                  />
-                  <span className="whitespace-nowrap text-gray-200">
-                    Release calendar
-                  </span>
-                </div>
+                <Link href="/video-game-releases">
+                  <div className="flex cursor-pointer items-center gap-3 rounded-md p-2 transition-colors hover:bg-gray-700">
+                    <Image
+                      src={releaseCalendar}
+                      alt="release-calendar"
+                      className="h-8 w-8 flex-shrink-0 rounded-md bg-zinc-600 p-1"
+                    />
+                    <span className="whitespace-nowrap text-gray-200">
+                      Release calendar
+                    </span>
+                  </div>
+                </Link>
               </li>
             </ul>
           </section>
