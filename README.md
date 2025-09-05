@@ -39,11 +39,11 @@ src/
 
 ## 🛠 기술 스택
 
-### Frontend
-
 - **Next.js**
 - **React**
 - **TypeScript**
 - **Tailwind CSS**
 - **TanStack Query**
 - **Axios**
+- RAWG API
+- Vercel
