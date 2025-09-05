@@ -17,7 +17,7 @@ export default async function Home() {
         </div>
         <section className="w-full">
           <div className="mt-6 lg:mt-10">
-            <InfiniteScrollWrapper initialData={initialData} />
+            <InfiniteScrollWrapper initialData={initialData} type="trending" />
           </div>
         </section>
       </main>
