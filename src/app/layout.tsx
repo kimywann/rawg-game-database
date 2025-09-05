@@ -6,6 +6,8 @@ import Header from "@/components/layout/Header";
 import Container from "@/components/layout/Container";
 import SideBar from "@/components/ui/SideBar";
 
+import Providers from "@/providers";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -31,15 +33,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Header />
-        <section>
+        <Providers>
+          <Header />
           <Container>
             <SideBar />
             <div className="flex w-full">
               <main>{children}</main>
             </div>
           </Container>
-        </section>
+        </Providers>
       </body>
     </html>
   );

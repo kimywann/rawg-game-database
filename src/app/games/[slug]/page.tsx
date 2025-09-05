@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getGameByDetail, getGameScreenshots } from "@/api/games";
+import { getGameByDetail, getGameScreenshots } from "@/api/gamesApi";
 import { GameImageGallery } from "@/components/features/GameImageGallery";
 
 interface SlugPageProps {
