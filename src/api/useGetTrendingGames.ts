@@ -33,8 +33,8 @@ const useGetTrendingGames = (options?: UseGetTrendingGamesOptions) => {
       return undefined;
     },
     initialPageParam: options?.initialPageParam || 1,
-    staleTime: 1000 * 60 * 5,
-    gcTime: 1000 * 60 * 30,
+    staleTime: 1000 * 60 * 60,
+    gcTime: 1000 * 60 * 90,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     ...(options?.initialData && { initialData: options.initialData }),
