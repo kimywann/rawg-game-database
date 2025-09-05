@@ -1,3 +1,5 @@
+"use client";
+
 import { Game } from "@/types/game";
 import GameCard from "@/components/features/GameCard";
 import { useEffect, useRef, useState } from "react";
