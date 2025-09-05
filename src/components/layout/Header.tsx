@@ -12,9 +12,7 @@ const Header = () => {
         <Link href="/">
           <Image src={logo} alt="logo" className="cursor-pointer" />
         </Link>
-        <div className="flex-grow">
-          <SearchBar />
-        </div>
+        <div className="flex-grow">{/* <SearchBar /> */}</div>
       </div>
     </header>
   );
