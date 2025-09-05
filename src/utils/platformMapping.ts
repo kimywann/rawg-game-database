@@ -2,6 +2,7 @@ export const platformIconMap: Record<string, string> = {
   pc: "/src/assets/icons/platforms/pc.svg",
   macos: "/src/assets/icons/platforms/macos.svg",
   linux: "/src/assets/icons/platforms/linux.svg",
+  web: "/src/assets/icons/platforms/pc.svg", // 웹 플랫폼 추가
 
   playstation: "/src/assets/icons/platforms/playstation.svg",
   playstation5: "/src/assets/icons/platforms/playstation.svg",
@@ -21,6 +22,7 @@ export const platformIconMap: Record<string, string> = {
   "xbox-series-x": "/src/assets/icons/platforms/xbox.svg",
   "xbox-one": "/src/assets/icons/platforms/xbox.svg",
   "xbox-360": "/src/assets/icons/platforms/xbox.svg",
+  xbox360: "/src/assets/icons/platforms/xbox.svg",
   "xbox-old": "/src/assets/icons/platforms/xbox.svg",
 
   nintendo: "/src/assets/icons/platforms/nintendo.svg",
@@ -39,6 +41,7 @@ export const platformGroups: Record<string, string[]> = {
   pc: ["pc"],
   macos: ["macos"],
   linux: ["linux"],
+  web: ["web"], // 웹 플랫폼 그룹 추가
   playstation: [
     "playstation",
     "playstation5",
@@ -54,7 +57,14 @@ export const platformGroups: Record<string, string[]> = {
     "psp",
     "ps-vita",
   ],
-  xbox: ["xbox", "xbox-series-x", "xbox-one", "xbox-360", "xbox-old"],
+  xbox: [
+    "xbox",
+    "xbox-series-x",
+    "xbox-one",
+    "xbox-360",
+    "xbox360",
+    "xbox-old",
+  ],
   nintendo: [
     "nintendo",
     "nintendo-switch",
@@ -77,6 +87,7 @@ export const getPlatformName = (platformSlug: string): string => {
     pc: "PC",
     macos: "macOS",
     linux: "Linux",
+    web: "Web",
     playstation5: "PS5",
     "playstation-5": "PS5",
     playstation4: "PS4",
@@ -86,6 +97,7 @@ export const getPlatformName = (platformSlug: string): string => {
     "xbox-series-x": "Xbox Series X/S",
     "xbox-one": "Xbox One",
     "xbox-360": "Xbox 360",
+    xbox360: "Xbox 360",
     "nintendo-switch": "Nintendo Switch",
     android: "Android",
     ios: "iOS",
@@ -111,7 +123,6 @@ export const getUniquePlatformGroups = (
       }
     }
 
-    // 디버깅: 매칭되지 않은 플랫폼 로그
     if (process.env.NODE_ENV === "development") {
       const matched = Object.entries(platformGroups).some(([, groupSlugs]) =>
         groupSlugs.includes(slug),
