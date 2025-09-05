@@ -2,7 +2,15 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    domains: ["fakestoreapi.com", "cdn.myanimelist.net", "media.rawg.io"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "media.rawg.io",
+        pathname: "/**",
+      },
+    ],
+    formats: ["image/webp", "image/avif"],
+    minimumCacheTTL: 60 * 60 * 24 * 7, // 7일 캐시
   },
 };
 
