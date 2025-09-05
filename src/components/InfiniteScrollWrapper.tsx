@@ -5,24 +5,86 @@ import { useInView } from "react-intersection-observer";
 
 import GameList from "./features/GameList";
 import useGetTrendingGames from "@/api/useGetTrendingGames";
+import useGetBestOfTheYearGames from "@/api/useGetBestOfTheYearGames";
+import useGetTop250Games from "@/api/useGetTop250Games";
+import useGetAllGames from "@/api/useGetAllGames";
 
 import { ApiResponse } from "@/types/api";
 
 interface InfiniteScrollWrapperProps {
   initialData: ApiResponse;
+  type: "trending" | "best-of-the-year" | "top-250" | "all-games";
 }
 
 export default function InfiniteScrollWrapper({
   initialData,
+  type,
 }: InfiniteScrollWrapperProps) {
+  const trendingQuery = useGetTrendingGames(
+    type === "trending"
+      ? {
+          initialPageParam: 2,
+          initialData: {
+            pages: [initialData],
+            pageParams: [1],
+          },
+        }
+      : undefined,
+  );
+
+  const bestOfTheYearQuery = useGetBestOfTheYearGames(
+    type === "best-of-the-year"
+      ? {
+          initialPageParam: 2,
+          initialData: {
+            pages: [initialData],
+            pageParams: [1],
+          },
+        }
+      : undefined,
+  );
+
+  const top250Query = useGetTop250Games(
+    type === "top-250"
+      ? {
+          initialPageParam: 2,
+          initialData: {
+            pages: [initialData],
+            pageParams: [1],
+          },
+        }
+      : undefined,
+  );
+
+  const allGamesQuery = useGetAllGames(
+    type === "all-games"
+      ? {
+          initialPageParam: 2,
+          initialData: {
+            pages: [initialData],
+            pageParams: [1],
+          },
+        }
+      : undefined,
+  );
+
+  const getQueryByType = () => {
+    switch (type) {
+      case "trending":
+        return trendingQuery;
+      case "best-of-the-year":
+        return bestOfTheYearQuery;
+      case "top-250":
+        return top250Query;
+      case "all-games":
+        return allGamesQuery;
+      default:
+        return trendingQuery;
+    }
+  };
+
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
-    useGetTrendingGames({
-      initialPageParam: 2,
-      initialData: {
-        pages: [initialData],
-        pageParams: [1],
-      },
-    });
+    getQueryByType();
 
   const games = data?.pages.flatMap((page) => page.results) || [];
   const { ref, inView } = useInView({

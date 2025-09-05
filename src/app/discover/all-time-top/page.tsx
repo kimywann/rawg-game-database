@@ -1,20 +1,20 @@
-import { getAllGames } from "@/api/gamesApi";
+import { getTop250Games } from "@/api/gamesApi";
 import InfiniteScrollWrapper from "@/components/InfiniteScrollWrapper";
 
-export default async function AllGamesPage() {
-  const initialData = await getAllGames(1);
+export default async function AllTimeTopPage() {
+  const initialData = await getTop250Games(1);
 
   return (
     <div className="flex">
       <main className="flex w-full flex-col items-center lg:flex-1 lg:items-start">
         <div className="flex flex-col items-center gap-2 text-center lg:items-start lg:text-left">
           <h1 className="text-4xl font-bold sm:text-5xl lg:text-7xl">
-            All Games
+            All-time top 250
           </h1>
         </div>
         <section className="w-full">
           <div className="mt-6 lg:mt-10">
-            <InfiniteScrollWrapper initialData={initialData} type="all-games" />
+            <InfiniteScrollWrapper initialData={initialData} type="top-250" />
           </div>
         </section>
       </main>

@@ -1,19 +1,26 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { ApiResponse } from "@/types/api";
 
-const fetchTrendingGames = async ({ pageParam }: { pageParam: number }) => {
-  const response = await fetch(`/api/games?type=trending&page=${pageParam}`, {
-    cache: "no-store", // 캐시 비활성화
-  });
+const fetchBestOfTheYearGames = async ({
+  pageParam,
+}: {
+  pageParam: number;
+}) => {
+  const response = await fetch(
+    `/api/games?type=best-of-the-year&page=${pageParam}`,
+    {
+      cache: "no-store", // 캐시 비활성화
+    },
+  );
 
   if (!response.ok) {
-    throw new Error("Failed to fetch trending games");
+    throw new Error("Failed to fetch best of the year games");
   }
 
   return response.json();
 };
 
-interface UseGetTrendingGamesOptions {
+interface UseGetBestOfTheYearGamesOptions {
   initialData?: {
     pages: ApiResponse[];
     pageParams: number[];
@@ -21,10 +28,12 @@ interface UseGetTrendingGamesOptions {
   initialPageParam?: number;
 }
 
-const useGetTrendingGames = (options?: UseGetTrendingGamesOptions) => {
+const useGetBestOfTheYearGames = (
+  options?: UseGetBestOfTheYearGamesOptions,
+) => {
   return useInfiniteQuery({
-    queryKey: ["trending-games"],
-    queryFn: fetchTrendingGames,
+    queryKey: ["best-of-the-year-games"],
+    queryFn: fetchBestOfTheYearGames,
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage.next) {
         return allPages.length + 1;
@@ -40,4 +49,4 @@ const useGetTrendingGames = (options?: UseGetTrendingGamesOptions) => {
   });
 };
 
-export default useGetTrendingGames;
+export default useGetBestOfTheYearGames;

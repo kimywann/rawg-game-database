@@ -1,19 +1,19 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { ApiResponse } from "@/types/api";
 
-const fetchTrendingGames = async ({ pageParam }: { pageParam: number }) => {
-  const response = await fetch(`/api/games?type=trending&page=${pageParam}`, {
+const fetchAllGames = async ({ pageParam }: { pageParam: number }) => {
+  const response = await fetch(`/api/games?type=all-games&page=${pageParam}`, {
     cache: "no-store", // 캐시 비활성화
   });
 
   if (!response.ok) {
-    throw new Error("Failed to fetch trending games");
+    throw new Error("Failed to fetch all games");
   }
 
   return response.json();
 };
 
-interface UseGetTrendingGamesOptions {
+interface UseGetAllGamesOptions {
   initialData?: {
     pages: ApiResponse[];
     pageParams: number[];
@@ -21,10 +21,10 @@ interface UseGetTrendingGamesOptions {
   initialPageParam?: number;
 }
 
-const useGetTrendingGames = (options?: UseGetTrendingGamesOptions) => {
+const useGetAllGames = (options?: UseGetAllGamesOptions) => {
   return useInfiniteQuery({
-    queryKey: ["trending-games"],
-    queryFn: fetchTrendingGames,
+    queryKey: ["all-games"],
+    queryFn: fetchAllGames,
     getNextPageParam: (lastPage, allPages) => {
       if (lastPage.next) {
         return allPages.length + 1;
@@ -40,4 +40,4 @@ const useGetTrendingGames = (options?: UseGetTrendingGamesOptions) => {
   });
 };
 
-export default useGetTrendingGames;
+export default useGetAllGames;
