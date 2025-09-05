@@ -18,7 +18,7 @@ const SideBar = () => {
           Home
         </Link>
         <div>
-          <section>
+          {/* <section>
             <span className="text-xl font-bold">New Releases</span>
             <ul className="mt-3 flex flex-col">
               <li>
@@ -36,30 +36,34 @@ const SideBar = () => {
                 </Link>
               </li>
             </ul>
-          </section>
+          </section> */}
           <section>
             <div className="mt-2">
               <span className="text-2xl font-bold">Top</span>
               <ul className="mt-3 flex flex-col">
                 <li>
-                  <div className="flex cursor-pointer items-center gap-3 rounded-md p-2 transition-colors hover:bg-gray-700">
-                    <Image
-                      src={bestOfTheYear}
-                      alt="best-of-the-year"
-                      className="h-8 w-8 flex-shrink-0 rounded-md bg-zinc-600 p-1"
-                    />
-                    <span>Best of the year</span>
-                  </div>
+                  <Link href="/discover/best-of-the-year">
+                    <div className="flex cursor-pointer items-center gap-3 rounded-md p-2 transition-colors hover:bg-gray-700">
+                      <Image
+                        src={bestOfTheYear}
+                        alt="best-of-the-year"
+                        className="h-8 w-8 flex-shrink-0 rounded-md bg-zinc-600 p-1"
+                      />
+                      <span>Best of the year</span>
+                    </div>
+                  </Link>
                 </li>
                 <li>
-                  <div className="flex cursor-pointer items-center gap-3 rounded-md p-2 transition-colors hover:bg-gray-700">
-                    <Image
-                      src={allTimeTop250}
-                      alt="all-time-top-250"
-                      className="h-8 w-8 flex-shrink-0 rounded-md bg-zinc-600 p-1"
-                    />
-                    <span>All-time top 250</span>
-                  </div>
+                  <Link href="/discover/all-time-top">
+                    <div className="flex cursor-pointer items-center gap-3 rounded-md p-2 transition-colors hover:bg-gray-700">
+                      <Image
+                        src={allTimeTop250}
+                        alt="all-time-top-250"
+                        className="h-8 w-8 flex-shrink-0 rounded-md bg-zinc-600 p-1"
+                      />
+                      <span>All-time top 250</span>
+                    </div>
+                  </Link>
                 </li>
               </ul>
             </div>
