@@ -9,14 +9,11 @@ export interface Game {
   rating_top?: number;
   ratings?: Record<string, number>;
   ratings_count?: number;
-  reviews_text_count?: number;
+  reviews_text_count?: string;
   added?: number;
   added_by_status?: Record<string, number>;
   metacritic?: number | null;
   playtime?: number;
-  suggestions_count?: number;
-  updated?: string;
-  esrb_rating?: { id: number; name: string; slug: string } | null;
   platforms?: Array<{
     platform: {
       id: number;
@@ -25,6 +22,11 @@ export interface Game {
     };
   }>;
   genres?: Genre[];
+}
+
+export interface GameDetail extends Game {
+  description?: string;
+  screenshots_count?: number;
 }
 
 export interface Genre {
