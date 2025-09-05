@@ -12,7 +12,7 @@ interface GameCardProps {
 
 const GameCard = ({ game }: GameCardProps) => {
   return (
-    <li className="mx-auto mb-6 flex w-full max-w-80 break-inside-avoid flex-col overflow-hidden rounded-lg bg-zinc-800 transition-all duration-300 hover:scale-105">
+    <li className="mx-auto mb-6 flex w-full max-w-80 flex-col overflow-hidden rounded-lg bg-zinc-800 transition-all duration-300 hover:scale-105">
       <div className="relative h-40 w-80 overflow-hidden">
         {game.background_image ? (
           <Image
