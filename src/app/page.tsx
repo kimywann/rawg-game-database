@@ -1,8 +1,32 @@
-import GameList from "@/components/features/GameList";
-import { getNewAndTrendingGames } from "@/api/games";
+"use client";
 
-export default async function Home() {
-  const games = await getNewAndTrendingGames();
+import GameList from "@/components/features/GameList";
+import useGetTrendingGames from "@/api/useGetTrendingGames";
+
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
+
+export default function Home() {
+  const {
+    data,
+    isLoading,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useGetTrendingGames();
+
+  const games = data?.pages.flatMap((page) => page.results) || [];
+  const { ref, inView } = useInView();
+
+  useEffect(() => {
+    if (inView && hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [inView]);
+
+  // load more가 보이는 순간
+  // fetchNextPage 호출
 
   return (
     <div className="flex">
@@ -19,6 +43,7 @@ export default async function Home() {
           <div className="mt-6 lg:mt-10">
             <GameList games={games} />
           </div>
+          <h1 ref={ref}>Load more</h1>
         </section>
       </main>
     </div>
