@@ -3,7 +3,6 @@ import { apiClient } from "./apiClient";
 import { Game, GameDetail } from "@/types/game";
 import { ApiResponse, ScreenShotResponse } from "@/types/api";
 
-// 트렌딩 게임 가져오기
 export const getNewAndTrendingGames = async (
   page: number,
 ): Promise<ApiResponse> => {
@@ -45,11 +44,127 @@ export const getNewAndTrendingGames = async (
   }
 };
 
-// 월별 릴리즈 게임 가져오기
+export const getBestOfTheYearGames = async (
+  page: number,
+): Promise<ApiResponse> => {
+  try {
+    const { data } = await apiClient.get<ApiResponse>("/games", {
+      params: {
+        page: page,
+        page_size: 20,
+        ordering: "-playtime",
+        dates: "2025-01-01,2025-12-31",
+      },
+    });
+
+    const filteredGames = data.results.filter(
+      (game) =>
+        !game.genres?.some(
+          (genre) =>
+            genre.name.toLowerCase() === "casual" ||
+            genre.slug === "casual" ||
+            genre.name.toLowerCase() === "massively multiplayer" ||
+            genre.slug === "massively-multiplayer",
+        ),
+    );
+
+    return {
+      count: filteredGames.length,
+      next: data.next,
+      previous: data.previous,
+      results: filteredGames,
+    };
+  } catch (error) {
+    console.error("Failed to fetch best of the year games:", error);
+    return {
+      count: 0,
+      next: null,
+      previous: null,
+      results: [],
+    };
+  }
+};
+
+export const getTop250Games = async (page: number): Promise<ApiResponse> => {
+  try {
+    const { data } = await apiClient.get<ApiResponse>("/games", {
+      params: {
+        page: page,
+        page_size: 20,
+        ordering: "-metacritic",
+      },
+    });
+
+    const filteredGames = data.results.filter(
+      (game) =>
+        !game.genres?.some(
+          (genre) =>
+            genre.name.toLowerCase() === "casual" ||
+            genre.slug === "casual" ||
+            genre.name.toLowerCase() === "massively multiplayer" ||
+            genre.slug === "massively-multiplayer",
+        ),
+    );
+
+    return {
+      count: filteredGames.length,
+      next: data.next,
+      previous: data.previous,
+      results: filteredGames,
+    };
+  } catch (error) {
+    console.error("Failed to fetch top 250 games:", error);
+    return {
+      count: 0,
+      next: null,
+      previous: null,
+      results: [],
+    };
+  }
+};
+
+export const getAllGames = async (page: number): Promise<ApiResponse> => {
+  try {
+    const { data } = await apiClient.get<ApiResponse>("/games", {
+      params: {
+        page: page,
+        page_size: 20,
+        ordering: "-added",
+      },
+    });
+
+    const filteredGames = data.results.filter(
+      (game) =>
+        !game.genres?.some(
+          (genre) =>
+            genre.name.toLowerCase() === "casual" ||
+            genre.slug === "casual" ||
+            genre.name.toLowerCase() === "massively multiplayer" ||
+            genre.slug === "massively-multiplayer",
+        ),
+    );
+
+    return {
+      count: filteredGames.length,
+      next: data.next,
+      previous: data.previous,
+      results: filteredGames,
+    };
+  } catch (error) {
+    console.error("Failed to fetch all games:", error);
+    return {
+      count: 0,
+      next: null,
+      previous: null,
+      results: [],
+    };
+  }
+};
+
 export const getGamesByMonth = async (
   year: number,
   month: number,
-): Promise<Game[]> => {
+): Promise<ApiResponse> => {
   try {
     const startDate = `${year}-${month.toString().padStart(2, "0")}-01`;
     // 해당 월의 마지막 날 계산 (다음 달 0일 = 이번 달 마지막 날)
@@ -62,27 +177,38 @@ export const getGamesByMonth = async (
       params: {
         dates: `${startDate},${endDate}`,
         ordering: "released",
-        page_size: 50,
+        page_size: 20,
       },
     });
 
-    // Casual 장르를 가진 게임들을 필터링해서 제외
     const filteredGames = data.results.filter(
       (game) =>
         !game.genres?.some(
           (genre) =>
-            genre.name.toLowerCase() === "casual" || genre.slug === "casual",
+            genre.name.toLowerCase() === "casual" ||
+            genre.slug === "casual" ||
+            genre.name.toLowerCase() === "massively multiplayer" ||
+            genre.slug === "massively-multiplayer",
         ),
     );
 
-    return filteredGames;
+    return {
+      count: filteredGames.length,
+      next: data.next,
+      previous: data.previous,
+      results: filteredGames,
+    };
   } catch (error) {
     console.error("Failed to fetch games by month:", error);
-    return [];
+    return {
+      count: 0,
+      next: null,
+      previous: null,
+      results: [],
+    };
   }
 };
 
-// 게임 상세 정보 가져오기
 export const getGameByDetail = async (
   slug: string,
 ): Promise<GameDetail | null> => {
@@ -95,7 +221,6 @@ export const getGameByDetail = async (
   }
 };
 
-// 게임 스크린샷 가져오기
 export const getGameScreenshots = async (
   gameId: string | number,
   params?: {
@@ -111,19 +236,12 @@ export const getGameScreenshots = async (
       page_size: params?.page_size || 50,
     };
 
-    // 디버깅: 실제 요청 URL과 파라미터 확인
-    console.log("Request URL:", `/games/${gameId}/screenshots`);
-    console.log("Request params:", requestParams);
-
     const { data } = await apiClient.get<ScreenShotResponse>(
       `/games/${gameId}/screenshots`,
       {
         params: requestParams,
       },
     );
-
-    // 디버깅: 응답 데이터 확인
-    console.log("API Response:", data);
 
     return data;
   } catch (error) {
