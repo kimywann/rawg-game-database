@@ -2,6 +2,9 @@ import { Game } from "@/types/game";
 
 import Link from "next/link";
 import Image from "next/image";
+import { memo } from "react";
+
+import added from "@/assets/icons/added.svg";
 
 import PlatformIcon from "@/components/ui/PlatformIcon";
 import { getUniquePlatformGroups } from "@/utils/platformMapping";
@@ -11,7 +14,7 @@ interface GameCardProps {
   priority?: boolean;
 }
 
-const GameCard = ({ game, priority = false }: GameCardProps) => {
+const GameCard = memo(({ game, priority = false }: GameCardProps) => {
   return (
     <li className="mx-auto mb-6 flex w-full max-w-80 flex-col overflow-hidden rounded-lg bg-zinc-800 transition-all duration-300 hover:scale-105">
       <div className="relative h-40 w-80 overflow-hidden">
@@ -19,10 +22,11 @@ const GameCard = ({ game, priority = false }: GameCardProps) => {
           <Image
             src={game.background_image}
             alt={game.name}
-            fill
-            className="object-cover"
+            width={320}
+            height={160}
             priority={priority}
-            sizes="320px"
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
           />
         ) : (
           <div className="flex h-40 w-80 items-center justify-center bg-zinc-700">
@@ -37,9 +41,10 @@ const GameCard = ({ game, priority = false }: GameCardProps) => {
             {game.name}
           </h2>
         </Link>
-        <p className="mt-2 flex h-5 w-10 items-center justify-center rounded-md bg-zinc-700 text-sm text-white">
-          {game.added}
-        </p>
+        <div className="mt-2 flex h-6 w-13 items-center justify-center gap-1 rounded-md bg-zinc-700 p-2">
+          <Image src={added} alt="added" className="h-2 w-2 flex-shrink-0" />
+          <p className="text-sm text-white">{game.added}</p>
+        </div>
 
         {/* 플랫폼 아이콘 섹션 - 중복 제거 */}
         {game.platforms && game.platforms.length > 0 && (
@@ -56,12 +61,12 @@ const GameCard = ({ game, priority = false }: GameCardProps) => {
 
         <div className="mt-2 divide-y divide-zinc-700">
           <div className="flex justify-between py-1">
-            <p className="text-sm text-zinc-500">Release date:</p>
+            <p className="text-sm text-zinc-300">Release date:</p>
             <p className="text-sm">{game.released}</p>
           </div>
 
           <div className="flex justify-between py-1">
-            <p className="text-sm text-zinc-500">Genres:</p>
+            <p className="text-sm text-zinc-300">Genres:</p>
             <div className="mt-1 flex flex-wrap gap-1">
               {game.genres?.map((genre, idx) => (
                 <span key={genre.id} className="text-xs">
@@ -75,6 +80,8 @@ const GameCard = ({ game, priority = false }: GameCardProps) => {
       </div>
     </li>
   );
-};
+});
+
+GameCard.displayName = "GameCard";
 
 export default GameCard;
