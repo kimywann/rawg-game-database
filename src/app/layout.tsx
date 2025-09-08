@@ -37,9 +37,7 @@ export default function RootLayout({
           <Header />
           <Container>
             <SideBar />
-            <div className="flex w-full">
-              <main>{children}</main>
-            </div>
+            <main className="w-full max-w-4xl lg:max-w-none">{children}</main>
           </Container>
         </Providers>
       </body>

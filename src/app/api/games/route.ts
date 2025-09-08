@@ -4,7 +4,7 @@ import {
   getBestOfTheYearGames,
   getTop250Games,
   getAllGames,
-} from "@/api/gamesApi";
+} from "@/api/games";
 
 export async function GET(request: NextRequest) {
   try {
