@@ -1,9 +1,10 @@
-import { getNewAndTrendingGames } from "@/api/gamesApi";
+import { Suspense } from "react";
+
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { GameListSkeleton } from "@/components/ui/GameListSkeleton";
 import InfiniteScrollWrapper from "@/components/InfiniteScrollWrapper";
 
 export default async function Home() {
-  const initialData = await getNewAndTrendingGames(1);
-
   return (
     <div className="flex">
       <main className="flex w-full flex-col items-center lg:flex-1 lg:items-start">
@@ -17,7 +18,11 @@ export default async function Home() {
         </div>
         <section className="w-full">
           <div className="mt-6 lg:mt-10">
-            <InfiniteScrollWrapper initialData={initialData} type="trending" />
+            <ErrorBoundary>
+              <Suspense fallback={<GameListSkeleton />}>
+                <InfiniteScrollWrapper type="trending" />
+              </Suspense>
+            </ErrorBoundary>
           </div>
         </section>
       </main>
