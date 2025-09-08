@@ -22,6 +22,7 @@ export interface Game {
     };
   }>;
   genres?: Genre[];
+  priority?: boolean;
 }
 
 export interface GameDetail extends Game {
