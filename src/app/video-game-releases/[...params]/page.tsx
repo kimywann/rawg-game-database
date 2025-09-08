@@ -1,4 +1,4 @@
-import { getGamesByMonth } from "@/api/gamesApi";
+import { getGamesByMonth } from "@/api/games";
 import GameList from "@/components/features/GameList";
 import MonthNavigation from "@/components/ui/MonthNavigation";
 import { notFound } from "next/navigation";
