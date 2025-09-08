@@ -1,9 +1,10 @@
-import { getTop250Games } from "@/api/gamesApi";
+import { Suspense } from "react";
+
+import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { GameListSkeleton } from "@/components/ui/GameListSkeleton";
 import InfiniteScrollWrapper from "@/components/InfiniteScrollWrapper";
 
 export default async function AllTimeTopPage() {
-  const initialData = await getTop250Games(1);
-
   return (
     <div className="flex">
       <main className="flex w-full flex-col items-center lg:flex-1 lg:items-start">
@@ -14,7 +15,11 @@ export default async function AllTimeTopPage() {
         </div>
         <section className="w-full">
           <div className="mt-6 lg:mt-10">
-            <InfiniteScrollWrapper initialData={initialData} type="top-250" />
+            <ErrorBoundary>
+              <Suspense fallback={<GameListSkeleton />}>
+                <InfiniteScrollWrapper type="top-250" />
+              </Suspense>
+            </ErrorBoundary>
           </div>
         </section>
       </main>
