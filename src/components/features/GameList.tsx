@@ -69,9 +69,18 @@ const GameList = ({ games, onRender }: GameListProps) => {
   }
 
   return (
-    <div ref={containerRef} className="flex gap-4">
+    <div
+      ref={containerRef}
+      className="flex gap-4"
+      role="region"
+      aria-label="게임 목록"
+    >
       {columns.map((columnGames, columnIndex) => (
-        <div key={columnIndex} className="flex-1 space-y-4">
+        <ul
+          key={columnIndex}
+          className="flex-1 list-none space-y-4"
+          aria-label={`게임 목록 컬럼 ${columnIndex + 1}`}
+        >
           {columnGames.map((game, gameIndex) => (
             <GameCard
               key={`${game.id}-${columnIndex}-${gameIndex}`}
@@ -79,7 +88,7 @@ const GameList = ({ games, onRender }: GameListProps) => {
               priority={game.priority}
             />
           ))}
-        </div>
+        </ul>
       ))}
     </div>
   );
