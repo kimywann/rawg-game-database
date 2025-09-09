@@ -38,16 +38,20 @@ export const GameImageGallery = ({
       <div className="flex w-full flex-col gap-4 lg:w-1/2">
         {/* 메인 이미지 */}
         <div className="flex max-w-[520px] flex-col gap-4">
-          <Image
-            src={displayImages[0] || backgroundImage || "/placeholder-game.jpg"}
-            alt={gameName}
-            width={520}
-            height={300}
-            className="h-auto w-full cursor-pointer rounded-lg object-cover transition-opacity hover:opacity-90"
-            sizes="(max-width: 768px) 100vw, 520px"
-            data-image-index="0"
-            data-gallery-trigger="true"
-          />
+          <div className="relative aspect-video w-full">
+            <Image
+              src={
+                displayImages[0] || backgroundImage || "/placeholder-game.jpg"
+              }
+              alt={gameName}
+              fill
+              className="cursor-pointer rounded-lg object-cover transition-opacity hover:opacity-90"
+              quality={75}
+              sizes="(max-width: 768px) 100vw, 520px"
+              data-image-index="0"
+              data-gallery-trigger="true"
+            />
+          </div>
         </div>
 
         {/* 썸네일 이미지들 */}
@@ -60,9 +64,10 @@ export const GameImageGallery = ({
                 alt={`${gameName} screenshot ${index + 2}`}
                 width={200}
                 height={112}
-                quality={75}
+                quality={50}
                 priority={true}
-                className="h-[130px] w-full cursor-pointer rounded object-cover transition-opacity hover:opacity-80"
+                className="w-full cursor-pointer rounded object-cover transition-opacity hover:opacity-80"
+                style={{ height: "130px" }}
                 data-image-index={index + 1}
                 data-gallery-trigger="true"
               />
