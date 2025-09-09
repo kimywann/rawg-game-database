@@ -1,5 +1,5 @@
 const Container = ({ children }: { children: React.ReactNode }) => {
-  return <div className="flex p-10">{children}</div>;
+  return <div className="flex p-7">{children}</div>;
 };
 
 export default Container;

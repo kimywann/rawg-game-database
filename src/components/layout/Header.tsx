@@ -10,7 +10,7 @@ const Header = () => {
 
   return (
     <header>
-      <div className="flex items-center justify-between p-8">
+      <div className="flex items-center justify-between p-6">
         <Link href="/">
           <Image src={logo} alt="logo" className="cursor-pointer" />
         </Link>
