@@ -59,9 +59,7 @@ const SlugPage = async ({ params }: SlugPageProps) => {
               </div>
             )}
 
-            <h1 className="text-4xl font-bold text-white lg:text-7xl">
-              {game.name}
-            </h1>
+            <h2 className="text-4xl font-bold text-white">{game.name}</h2>
 
             {game.rating && (
               <div className="flex items-center gap-2">
