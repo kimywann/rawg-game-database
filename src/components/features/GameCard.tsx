@@ -7,7 +7,7 @@ import { memo } from "react";
 import added from "@/assets/icons/added.svg";
 
 import PlatformIcon from "@/components/ui/PlatformIcon";
-import { getUniquePlatformGroups } from "@/utils/platformMapping";
+import { getUniquePlatformGroups } from "@/utils/platform-mapping";
 
 interface GameCardProps {
   game: Game;
@@ -24,7 +24,9 @@ const GameCard = memo(({ game, priority = false }: GameCardProps) => {
             alt={game.name}
             width={320}
             height={160}
+            quality={75}
             priority={priority}
+            loading={priority ? undefined : "lazy"}
             className="object-cover"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
           />
