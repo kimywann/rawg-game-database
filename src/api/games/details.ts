@@ -1,6 +1,6 @@
-import { apiClient } from "../apiClient";
+import { apiClient } from "../client";
 import { GameDetail } from "@/types/game";
-import { ScreenShotResponse } from "@/types/api";
+import { ScreenShotResponse } from "@/types/api-response";
 
 export const getGameByDetail = async (
   slug: string,

@@ -1,5 +1,5 @@
 import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
-import { ApiResponse } from "@/types/api";
+import { ApiResponse } from "@/types/api-response";
 
 const fetchGames = async ({
   type,

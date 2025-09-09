@@ -2,7 +2,7 @@
 
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import { SidebarProvider } from "@/contexts/SidebarContext";
+import { SidebarProvider } from "@/hooks/useSideber";
 
 import { useState } from "react";
 

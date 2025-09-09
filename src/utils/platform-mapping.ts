@@ -122,15 +122,6 @@ export const getUniquePlatformGroups = (
         break;
       }
     }
-
-    if (process.env.NODE_ENV === "development") {
-      const matched = Object.entries(platformGroups).some(([, groupSlugs]) =>
-        groupSlugs.includes(slug),
-      );
-      if (!matched) {
-        console.warn(`매칭되지 않은 플랫폼: ${slug} (${platform.name})`);
-      }
-    }
   });
 
   return Array.from(foundGroups);

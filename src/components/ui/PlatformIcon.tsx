@@ -1,4 +1,4 @@
-import { getPlatformIcon, getPlatformName } from "@/utils/platformMapping";
+import { getPlatformIcon, getPlatformName } from "@/utils/platform-mapping";
 
 interface PlatformIconProps {
   platformSlug: string;

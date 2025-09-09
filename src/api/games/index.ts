@@ -1,7 +1,7 @@
-import { apiClient } from "./apiClient";
+import { apiClient } from "../client";
 
-import { fetchGames } from "./games/helpers";
-import { ApiResponse } from "@/types/api";
+import { fetchGames } from "./helpers";
+import { ApiResponse } from "@/types/api-response";
 
 export const getNewAndTrendingGames = async (
   page: number,

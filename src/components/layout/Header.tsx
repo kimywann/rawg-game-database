@@ -3,7 +3,7 @@
 import logo from "@/assets/logo.svg";
 import Image from "next/image";
 import Link from "next/link";
-import { useSidebar } from "@/contexts/SidebarContext";
+import { useSidebar } from "@/hooks/useSideber";
 
 const Header = () => {
   const { toggleSidebar } = useSidebar();
