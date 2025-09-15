@@ -1,4 +1,4 @@
-export const GameListSkeleton = () => {
+export const Skeleton = () => {
   return (
     <div className="flex flex-wrap justify-center gap-5">
       {Array.from({ length: 10 }).map((_, i) => (

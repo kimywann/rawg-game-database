@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Game } from "@/types/game";
 import GameList from "@/components/features/GameList";
-import { GameListSkeleton } from "@/components/ui/GameListSkeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 interface SearchResultsProps {
   query: string;
@@ -47,7 +47,7 @@ export default function SearchResults({ query }: SearchResultsProps) {
   }, [query]);
 
   if (loading) {
-    return <GameListSkeleton />;
+    return <Skeleton />;
   }
 
   if (error) {

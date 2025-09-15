@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import { ErrorBoundary } from "@/components/common/ErrorBoundary";
-import { GameListSkeleton } from "@/components/ui/GameListSkeleton";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 import InfiniteScrollWrapper from "@/components/common/InfiniteScrollWrapper";
 
@@ -17,7 +17,7 @@ export default async function AllGamesPage() {
         <section className="w-full">
           <div className="mt-6 lg:mt-10">
             <ErrorBoundary>
-              <Suspense fallback={<GameListSkeleton />}>
+              <Suspense fallback={<Skeleton />}>
                 <InfiniteScrollWrapper type="all-games" />
               </Suspense>
             </ErrorBoundary>

@@ -36,7 +36,6 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
       className="bg-opacity-95 fixed inset-0 z-50 flex items-center justify-center bg-black"
       onClick={onClose}
     >
-      {/* 닫기 버튼 - 모달 외부에 위치 */}
       <button
         onClick={onClose}
         className="bg-opacity-20 hover:bg-opacity-30 absolute top-6 right-6 z-20 cursor-pointer rounded-full bg-zinc-900 p-3 text-white transition-all hover:scale-110 hover:bg-white hover:text-black"
