@@ -7,8 +7,8 @@ import Link from "next/link";
 import { useSidebar } from "@/hooks/useSideber";
 import { useState, useEffect, useRef } from "react";
 
-import SearchBar from "../ui/SearchBar";
-import SearchDropdown from "../ui/SearchDropdown";
+import SearchBar from "../features/SearchBar";
+import SearchDropdown from "../features/SearchDropdown";
 
 const Header = () => {
   const { toggleSidebar } = useSidebar();
@@ -50,7 +50,7 @@ const Header = () => {
 
     const timer = setTimeout(() => {
       fetchGames();
-    }, 300);
+    }, 500);
 
     return () => clearTimeout(timer);
   }, [searchTerm]);
