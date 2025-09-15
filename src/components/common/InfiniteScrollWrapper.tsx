@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
 import GameList from "../features/GameList";
@@ -8,15 +8,20 @@ import GameList from "../features/GameList";
 import useGetGames from "@/api/hooks/useGetGames";
 
 interface InfiniteScrollWrapperProps {
-  type: "trending" | "best-of-the-year" | "top-250" | "all-games";
+  type: "trending" | "best-of-the-year" | "top-250" | "all-games" | "search";
+  searchQuery?: string;
 }
 
 export default function InfiniteScrollWrapper({
   type,
+  searchQuery,
 }: InfiniteScrollWrapperProps) {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useGetGames(type);
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetGames(
+    type,
+    { searchQuery },
+  );
   const [isGameListRendered, setIsGameListRendered] = useState(false);
+  const isFetchingRef = useRef(false); // 중복 호출 방지
 
   const games = data?.pages.flatMap((page) => page.results) || [];
 
@@ -26,10 +31,40 @@ export default function InfiniteScrollWrapper({
   });
 
   useEffect(() => {
-    if (inView && hasNextPage && !isFetchingNextPage) {
+    if (
+      inView &&
+      hasNextPage &&
+      !isFetchingNextPage &&
+      !isFetchingRef.current
+    ) {
+      isFetchingRef.current = true;
       fetchNextPage();
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  useEffect(() => {
+    if (!isFetchingNextPage) {
+      isFetchingRef.current = false;
+    }
+  }, [isFetchingNextPage]);
+
+  if (type === "search") {
+    if (!searchQuery?.trim()) {
+      return (
+        <div className="flex items-center justify-center py-12">
+          <p className="text-gray-400">검색어를 입력해주세요.</p>
+        </div>
+      );
+    }
+
+    if (games.length === 0 && !isFetchingNextPage) {
+      return (
+        <div className="flex items-center justify-center py-12">
+          <p className="text-gray-400">검색 결과가 없습니다.</p>
+        </div>
+      );
+    }
+  }
 
   return (
     <>
@@ -43,10 +78,12 @@ export default function InfiniteScrollWrapper({
           <div className="text-lg font-medium text-zinc-300">
             Scroll to load more
           </div>
-        ) : isGameListRendered ? (
+        ) : isGameListRendered && games.length > 0 ? (
           <div className="text-center">
             <h2 className="mb-2 text-2xl font-bold text-zinc-800">
-              모든 게임을 확인했습니다!
+              {type === "search"
+                ? "모든 검색 결과를 확인했습니다!"
+                : "모든 게임을 확인했습니다!"}
             </h2>
             <p className="text-zinc-600">더 이상 로드할 게임이 없습니다.</p>
           </div>
