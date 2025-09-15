@@ -61,9 +61,7 @@ export const GameImageModal = ({
   return (
     <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
       <div className="flex h-full flex-col">
-        {/* 메인 이미지 영역 */}
-        <div className="relative flex flex-1 items-center justify-center px-20 py-8">
-          {/* 네비게이션 버튼들 */}
+        <div className="relative flex flex-1 items-center justify-center px-30">
           {allImages.length > 1 && (
             <>
               <button
@@ -108,17 +106,15 @@ export const GameImageModal = ({
             </>
           )}
 
-          {/* 현재 선택된 이미지 */}
           <Image
             src={allImages[selectedImageIndex]?.image || backgroundImage}
             alt={`${gameName} screenshot ${selectedImageIndex + 1}`}
             width={allImages[selectedImageIndex]?.width || 1920}
             height={allImages[selectedImageIndex]?.height || 1080}
-            className="h-[400px] w-full object-contain sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] 2xl:h-[800px]"
+            className="h-[300px] w-full object-contain sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[500px] 2xl:h-[600px]"
           />
         </div>
 
-        {/* 하단 썸네일 영역 */}
         {allImages.length > 1 && (
           <div className="bg-opacity-50 bg-black">
             <div className="flex justify-center">
@@ -138,7 +134,7 @@ export const GameImageModal = ({
                       alt={`${gameName} thumbnail ${index + 1}`}
                       width={120}
                       height={68}
-                      className="h-[68px] w-[120px] object-cover"
+                      className="mt-10 h-[68px] w-[120px] object-cover"
                     />
                   </button>
                 ))}
