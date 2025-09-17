@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
 
 interface ModalProps {
   isOpen: boolean;
@@ -31,7 +32,7 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
 
   if (!isOpen) return null;
 
-  return (
+  const modalContent = (
     <div
       className="bg-opacity-95 fixed inset-0 z-50 flex items-center justify-center bg-black"
       onClick={onClose}
@@ -65,4 +66,5 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => {
       </div>
     </div>
   );
+  return createPortal(modalContent, document.body);
 };
