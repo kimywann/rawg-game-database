@@ -43,7 +43,7 @@ const GameCard = memo(({ game, priority = false }: GameCardProps) => {
             {game.name}
           </h2>
         </Link>
-        <div className="mt-2 flex h-6 w-13 items-center justify-center gap-1 rounded-md bg-zinc-700 p-2">
+        <div className="mt-2 flex h-7 w-15 items-center justify-center gap-1 rounded-sm bg-zinc-700">
           <Image src={added} alt="added" className="h-2 w-2 flex-shrink-0" />
           <p className="text-sm text-white">{game.added}</p>
         </div>
