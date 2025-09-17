@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
-import GameList from "../features/GameList";
+import GameList from "@/components/game/GameList";
 
 import useGetGames from "@/api/hooks/useGetGames";
 
@@ -21,7 +21,7 @@ export default function InfiniteScrollWrapper({
     { searchQuery },
   );
   const [isGameListRendered, setIsGameListRendered] = useState(false);
-  const isFetchingRef = useRef(false); // 중복 호출 방지
+  const isFetchingRef = useRef(false);
 
   const games = data?.pages.flatMap((page) => page.results) || [];
 

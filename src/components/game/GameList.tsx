@@ -1,7 +1,7 @@
 "use client";
 
 import { Game } from "@/types/game";
-import GameCard from "@/components/features/GameCard";
+import GameCard from "@/components/game/GameCard";
 import { useEffect, useRef, useState, useMemo, useCallback } from "react";
 
 interface GameListProps {

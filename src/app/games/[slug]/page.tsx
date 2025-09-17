@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getGameByDetail, getGameScreenshots } from "@/api/games/details";
-import { GameImageGallery } from "@/components/features/GameImageGallery";
+import { GameImageGallery } from "@/components/game/GameImageGallery";
 
 interface SlugPageProps {
   params: Promise<{
@@ -18,9 +18,7 @@ const SlugPage = async ({ params }: SlugPageProps) => {
     getGameScreenshots(slug),
   ]);
 
-  if (!game) {
-    notFound();
-  }
+  if (!game) notFound();
 
   return (
     <div className="relative min-h-screen w-full items-center justify-center">
