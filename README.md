@@ -6,11 +6,11 @@ RAWG API는 50만 개의 게임 데이터를 제공하는 API입니다. 이를 �
 
 ## 기능 시연
 
-<img src="src/assets/gamelist.gif" alt="게임 리스트 조회" width="400">
+<img src="src/assets/gamelist.gif" alt="게임 리스트 조회" width="600">
 
 <br />
 
-<img src="src/assets/search.gif" alt="검색 기능" width="400">
+<img src="src/assets/search.gif" alt="검색 기능" width="600">
 
 ## 폴더 구조
 
