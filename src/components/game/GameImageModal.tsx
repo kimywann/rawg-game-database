@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Modal } from "@/components/ui/Modal";
+import { Modal } from "@/components/common/Modal";
 import { ScreenShot } from "@/types/screen-shot";
 
 interface GameImageModalProps {

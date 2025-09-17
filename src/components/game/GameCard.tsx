@@ -6,7 +6,7 @@ import { memo } from "react";
 
 import added from "@/assets/icons/added.svg";
 
-import PlatformIcon from "@/components/ui/PlatformIcon";
+import PlatformIcon from "@/components/common/PlatformIcon";
 import { getUniquePlatformGroups } from "@/utils/platform-mapping";
 
 interface GameCardProps {

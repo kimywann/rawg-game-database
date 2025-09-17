@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Game } from "@/types/game";
 import GameList from "@/components/features/GameList";
-import { Skeleton } from "@/components/ui/Skeleton";
+import { Skeleton } from "@/components/common/Skeleton";
 
 interface SearchResultsProps {
   query: string;

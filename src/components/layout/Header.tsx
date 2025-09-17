@@ -7,8 +7,8 @@ import Link from "next/link";
 import { useSidebar } from "@/hooks/useSideber";
 import { useState, useEffect, useRef } from "react";
 
-import SearchBar from "../features/SearchBar";
-import SearchDropdown from "../features/SearchDropdown";
+import SearchBar from "../search/SearchBar";
+import SearchDropdown from "../search/SearchDropdown";
 
 const Header = () => {
   const { toggleSidebar } = useSidebar();

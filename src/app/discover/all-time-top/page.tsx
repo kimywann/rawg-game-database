@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import { ErrorBoundary } from "@/components/common/ErrorBoundary";
-import { Skeleton } from "@/components/ui/Skeleton";
+import { Skeleton } from "@/components/common/Skeleton";
 import InfiniteScrollWrapper from "@/components/common/InfiniteScrollWrapper";
 
 export default async function AllTimeTopPage() {
