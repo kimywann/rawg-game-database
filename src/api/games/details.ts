@@ -1,13 +1,27 @@
-import { apiClient } from "../client";
 import { GameDetail } from "@/types/game";
 import { ScreenShotResponse } from "@/types/api-response";
+
+const API_BASE_URL = "https://api.rawg.io/api";
+const API_KEY = process.env.RAWG_API_KEY;
 
 export const getGameByDetail = async (
   slug: string,
 ): Promise<GameDetail | null> => {
   try {
-    const { data } = await apiClient.get<GameDetail>(`/games/${slug}`);
-    return data;
+    const response = await fetch(
+      `${API_BASE_URL}/games/${slug}?key=${API_KEY}`,
+      {
+        next: {
+          revalidate: 1800,
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
   } catch (error) {
     console.error(`Failed to fetch game with slug ${slug}:`, error);
     return null;
@@ -16,32 +30,24 @@ export const getGameByDetail = async (
 
 export const getGameScreenshots = async (
   gameId: string | number,
-  params?: {
-    ordering?: string;
-    page?: number;
-    page_size?: number;
-  },
 ): Promise<ScreenShotResponse> => {
   try {
-    const requestParams = {
-      ordering: params?.ordering || "-id",
-      page: params?.page || 1,
-      page_size: params?.page_size || 50,
-    };
-
-    const { data } = await apiClient.get<ScreenShotResponse>(
-      `/games/${gameId}/screenshots`,
+    const response = await fetch(
+      `${API_BASE_URL}/games/${gameId}/screenshots?key=${API_KEY}&page_size=10`,
       {
-        params: requestParams,
+        next: {
+          revalidate: 86400,
+        },
       },
     );
 
-    return data;
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    return await response.json();
   } catch (error) {
     console.error(`Failed to fetch screenshots for game ${gameId}:`, error);
-    return {
-      count: 0,
-      results: [],
-    };
+    return { count: 0, results: [] };
   }
 };
