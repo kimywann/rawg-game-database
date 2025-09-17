@@ -77,6 +77,8 @@ const useGetGames = (type: string, options?: UseGamesOptions) => {
     gcTime: 1000 * 60 * 30,
     refetchOnWindowFocus: false,
     refetchOnMount: false,
+    refetchOnReconnect: false,
+    retry: false,
     ...(options?.initialData && { initialData: options.initialData }),
   });
 };
