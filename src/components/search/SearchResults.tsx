@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Game } from "@/types/game";
-import GameList from "@/components/features/GameList";
+import GameList from "../game/GameList";
 import { Skeleton } from "@/components/common/Skeleton";
 
 interface SearchResultsProps {
