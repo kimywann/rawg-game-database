@@ -2,6 +2,7 @@ import { Game } from "@/types/game";
 
 import Link from "next/link";
 import Image from "next/image";
+
 import { memo } from "react";
 
 import added from "@/assets/icons/added.svg";
@@ -28,7 +29,7 @@ const GameCard = memo(({ game, priority = false }: GameCardProps) => {
             priority={priority}
             loading={priority ? undefined : "lazy"}
             className="object-cover"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+            sizes="320px"
           />
         ) : (
           <div className="flex h-40 w-80 items-center justify-center bg-zinc-700">
