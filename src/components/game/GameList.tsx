@@ -38,9 +38,8 @@ const GameList = ({ games, onRender }: GameListProps) => {
     const newColumns = Array.from({ length: columnCount }, () => [] as Game[]);
     games.forEach((game, index) => {
       const colIndex = index % columnCount;
-      const rowIndex = Math.floor(index / columnCount);
+      const priority = index < 10;
 
-      const priority = rowIndex <= 1;
       newColumns[colIndex].push({ ...game, priority });
     });
 
