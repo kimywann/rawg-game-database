@@ -27,7 +27,6 @@ const GameCard = memo(({ game, priority = false }: GameCardProps) => {
             height={160}
             quality={75}
             priority={priority}
-            loading={priority ? undefined : "lazy"}
             className="object-cover"
             sizes="320px"
           />
