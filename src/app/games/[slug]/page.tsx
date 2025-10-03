@@ -13,8 +13,10 @@ interface SlugPageProps {
 const SlugPage = async ({ params }: SlugPageProps) => {
   const { slug } = await params;
 
-  const game = await getGameByDetail(slug);
-  const screenshots = await getGameScreenshots(slug);
+  const [game, screenshots] = await Promise.all([
+    getGameByDetail(slug),
+    getGameScreenshots(slug),
+  ]);
 
   if (!game) notFound();
 
@@ -27,8 +29,7 @@ const SlugPage = async ({ params }: SlugPageProps) => {
             alt={`${game.name} background`}
             fill
             className="object-cover"
-            quality={80}
-            priority
+            quality={75}
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-black/80" />

@@ -40,9 +40,7 @@ export const GameImageGallery = ({
         <div className="flex max-w-[520px] flex-col gap-4">
           <div className="relative aspect-video w-full">
             <Image
-              src={
-                displayImages[0] || backgroundImage || "/placeholder-game.jpg"
-              }
+              src={displayImages[0] || backgroundImage}
               alt={gameName}
               fill
               className="cursor-pointer rounded-lg object-cover transition-opacity hover:opacity-90"
@@ -65,7 +63,6 @@ export const GameImageGallery = ({
                 width={200}
                 height={112}
                 quality={50}
-                priority={true}
                 className="w-full cursor-pointer rounded object-cover transition-opacity hover:opacity-80"
                 style={{ height: "130px" }}
                 data-image-index={index + 1}
