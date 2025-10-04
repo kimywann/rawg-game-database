@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
 import GameList from "@/components/game/GameList";
-
 import useGetGames from "@/api/hooks/useGetGames";
 
 interface InfiniteScrollWrapperProps {
@@ -20,13 +19,13 @@ export default function InfiniteScrollWrapper({
     type,
     { searchQuery },
   );
-  const [isGameListRendered, setIsGameListRendered] = useState(false);
   const isFetchingRef = useRef(false);
 
   const games = data?.pages.flatMap((page) => page.results) || [];
 
   const { ref, inView } = useInView({
-    threshold: 0.1,
+    threshold: 0,
+    rootMargin: "200px",
     triggerOnce: false,
   });
 
@@ -67,18 +66,23 @@ export default function InfiniteScrollWrapper({
   }
 
   return (
-    <>
-      <GameList games={games} onRender={setIsGameListRendered} />
-      <div ref={ref} className="flex h-20 items-center justify-center">
+    <div className="relative">
+      <GameList games={games} />
+
+      <div
+        ref={ref}
+        className="flex min-h-[100px] items-center justify-center py-8"
+      >
         {isFetchingNextPage ? (
           <div className="flex items-center gap-3">
             <div className="h-6 w-6 animate-spin rounded-full border-2 border-zinc-300 border-t-gray-500" />
+            <span className="text-zinc-400">로딩 중...</span>
           </div>
-        ) : hasNextPage && isGameListRendered ? (
-          <div className="text-lg font-medium text-zinc-300">
-            Scroll to load more
+        ) : hasNextPage ? (
+          <div className="text-lg font-medium text-zinc-400">
+            스크롤하여 더 보기
           </div>
-        ) : isGameListRendered && games.length > 0 ? (
+        ) : games.length > 0 ? (
           <div className="text-center">
             <h2 className="mb-2 text-2xl font-bold text-zinc-800">
               {type === "search"
@@ -89,6 +93,6 @@ export default function InfiniteScrollWrapper({
           </div>
         ) : null}
       </div>
-    </>
+    </div>
   );
 }
