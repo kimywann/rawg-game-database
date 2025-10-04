@@ -1,12 +1,8 @@
 import { Game } from "@/types/game";
-
 import Link from "next/link";
 import Image from "next/image";
-
 import { memo } from "react";
-
 import added from "@/assets/icons/added.svg";
-
 import PlatformIcon from "@/components/common/PlatformIcon";
 import { getUniquePlatformGroups } from "@/utils/platform-mapping";
 
@@ -17,7 +13,7 @@ interface GameCardProps {
 
 const GameCard = memo(({ game, priority = false }: GameCardProps) => {
   return (
-    <li className="mx-auto mb-6 flex w-full max-w-80 flex-col overflow-hidden rounded-lg bg-zinc-800 transition-all duration-300 hover:scale-105">
+    <li className="mx-auto mb-6 flex w-full max-w-80 cursor-pointer flex-col overflow-hidden rounded-lg bg-zinc-800 transition-all duration-300 hover:scale-105">
       <div className="relative h-40 w-80 overflow-hidden">
         {game.background_image ? (
           <Image
@@ -37,18 +33,18 @@ const GameCard = memo(({ game, priority = false }: GameCardProps) => {
         )}
       </div>
 
-      <div className="flex flex-col justify-between p-3">
+      <div className="flex flex-1 flex-col p-3">
         <Link href={`/games/${game.slug}`}>
-          <h2 className="cursor-pointer text-2xl leading-tight font-bold text-white transition-colors hover:text-zinc-500">
+          <h2 className="text-xl leading-tight font-bold text-white transition-colors hover:text-zinc-500">
             {game.name}
           </h2>
         </Link>
+
         <div className="mt-2 flex h-7 w-15 items-center justify-center gap-1 rounded-sm bg-zinc-700">
           <Image src={added} alt="added" className="h-2 w-2 flex-shrink-0" />
           <p className="text-sm text-white">{game.added}</p>
         </div>
 
-        {/* 플랫폼 아이콘 섹션 - 중복 제거 */}
         {game.platforms && game.platforms.length > 0 && (
           <div className="mt-2 flex flex-wrap gap-2">
             {getUniquePlatformGroups(game.platforms).map((platformGroup) => (
@@ -61,7 +57,7 @@ const GameCard = memo(({ game, priority = false }: GameCardProps) => {
           </div>
         )}
 
-        <div className="mt-2 divide-y divide-zinc-700">
+        <div className="mt-auto divide-y divide-zinc-700">
           <div className="flex justify-between py-1">
             <p className="text-sm text-zinc-300">Release date:</p>
             <p className="text-sm">{game.released}</p>
