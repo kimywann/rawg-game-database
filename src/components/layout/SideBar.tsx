@@ -4,8 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSidebar } from "@/hooks/useSideber";
 
-import lastMonth from "@/assets/icons/new-releases/last-30-days.svg";
-import releaseCalendar from "@/assets/icons/new-releases/release-calendar.svg";
 import bestOfTheYear from "@/assets/icons/top/best-of-the-year.svg";
 import allTimeTop250 from "@/assets/icons/top/all-time-top-250.svg";
 

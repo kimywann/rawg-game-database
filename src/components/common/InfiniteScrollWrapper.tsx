@@ -25,7 +25,7 @@ export default function InfiniteScrollWrapper({
 
   const { ref, inView } = useInView({
     threshold: 0,
-    rootMargin: "200px",
+    rootMargin: "300px",
     triggerOnce: false,
   });
 
@@ -67,12 +67,8 @@ export default function InfiniteScrollWrapper({
 
   return (
     <div className="relative">
-      <GameList games={games} />
-
-      <div
-        ref={ref}
-        className="flex min-h-[100px] items-center justify-center py-8"
-      >
+      <GameList games={games} triggerRef={ref} />
+      <div className="flex min-h-[100px] items-center justify-center py-8">
         {isFetchingNextPage ? (
           <div className="flex items-center gap-3">
             <div className="h-6 w-6 animate-spin rounded-full border-2 border-zinc-300 border-t-gray-500" />
