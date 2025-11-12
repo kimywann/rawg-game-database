@@ -5,6 +5,7 @@ import { useInView } from "react-intersection-observer";
 
 import GameList from "@/components/game/GameList";
 import useGetGames from "@/api/hooks/useGetGames";
+import { Skeleton } from "@/components/common/Skeleton";
 
 interface InfiniteScrollWrapperProps {
   type: "trending" | "best-of-the-year" | "top-250" | "all-games" | "search";
@@ -15,7 +16,7 @@ export default function InfiniteScrollWrapper({
   type,
   searchQuery,
 }: InfiniteScrollWrapperProps) {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetGames(
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useGetGames(
     type,
     { searchQuery },
   );
@@ -46,6 +47,11 @@ export default function InfiniteScrollWrapper({
       isFetchingRef.current = false;
     }
   }, [isFetchingNextPage]);
+
+  // 초기 로딩 상태 처리
+  if (isLoading) {
+    return <Skeleton />;
+  }
 
   if (type === "search") {
     if (!searchQuery?.trim()) {

@@ -1,7 +1,4 @@
-import { Suspense } from "react";
-
 import { ErrorBoundary } from "@/components/common/ErrorBoundary";
-import { Skeleton } from "@/components/common/Skeleton";
 import InfiniteScrollWrapper from "@/components/common/InfiniteScrollWrapper";
 
 export default async function AllTimeTopPage() {
@@ -16,9 +13,7 @@ export default async function AllTimeTopPage() {
         <section className="w-full">
           <div className="mt-6 lg:mt-10">
             <ErrorBoundary>
-              <Suspense fallback={<Skeleton />}>
-                <InfiniteScrollWrapper type="top-250" />
-              </Suspense>
+              <InfiniteScrollWrapper type="top-250" />
             </ErrorBoundary>
           </div>
         </section>

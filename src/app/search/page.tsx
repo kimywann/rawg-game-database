@@ -1,6 +1,4 @@
-import { Suspense } from "react";
 import Container from "@/components/layout/Container";
-import { Skeleton } from "@/components/common/Skeleton";
 import InfiniteScrollWrapper from "@/components/common/InfiniteScrollWrapper";
 
 interface SearchPageProps {
@@ -18,9 +16,7 @@ export default function SearchPage({ searchParams }: SearchPageProps) {
         <h1 className="mb-6 text-2xl font-bold text-white">
           {query ? `"${query}" 검색 결과` : "검색 결과"}
         </h1>
-        <Suspense fallback={<Skeleton />}>
-          <InfiniteScrollWrapper type="search" searchQuery={query} />
-        </Suspense>
+        <InfiniteScrollWrapper type="search" searchQuery={query} />
       </div>
     </Container>
   );
