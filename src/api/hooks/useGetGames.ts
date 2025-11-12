@@ -1,4 +1,4 @@
-import { useSuspenseInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { ApiResponse } from "@/types/api-response";
 
 const fetchGames = async ({
@@ -46,7 +46,7 @@ const useGetGames = (type: string, options?: UseGamesOptions) => {
     ? ["search", options.searchQuery]
     : ["games", type];
 
-  return useSuspenseInfiniteQuery({
+  return useInfiniteQuery({
     queryKey,
     queryFn: ({ pageParam }) =>
       fetchGames({

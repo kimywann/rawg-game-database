@@ -5,6 +5,7 @@ import { useInView } from "react-intersection-observer";
 
 import GameList from "@/components/game/GameList";
 import useGetGames from "@/api/hooks/useGetGames";
+import { Skeleton } from "@/components/common/Skeleton";
 
 interface InfiniteScrollWrapperProps {
   type: "trending" | "best-of-the-year" | "top-250" | "all-games" | "search";
@@ -15,7 +16,7 @@ export default function InfiniteScrollWrapper({
   type,
   searchQuery,
 }: InfiniteScrollWrapperProps) {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetGames(
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } = useGetGames(
     type,
     { searchQuery },
   );
@@ -25,7 +26,7 @@ export default function InfiniteScrollWrapper({
 
   const { ref, inView } = useInView({
     threshold: 0,
-    rootMargin: "200px",
+    rootMargin: "300px",
     triggerOnce: false,
   });
 
@@ -47,6 +48,11 @@ export default function InfiniteScrollWrapper({
     }
   }, [isFetchingNextPage]);
 
+  // 초기 로딩 상태 처리
+  if (isLoading) {
+    return <Skeleton />;
+  }
+
   if (type === "search") {
     if (!searchQuery?.trim()) {
       return (
@@ -67,12 +73,8 @@ export default function InfiniteScrollWrapper({
 
   return (
     <div className="relative">
-      <GameList games={games} />
-
-      <div
-        ref={ref}
-        className="flex min-h-[100px] items-center justify-center py-8"
-      >
+      <GameList games={games} triggerRef={ref} />
+      <div className="flex min-h-[100px] items-center justify-center py-8">
         {isFetchingNextPage ? (
           <div className="flex items-center gap-3">
             <div className="h-6 w-6 animate-spin rounded-full border-2 border-zinc-300 border-t-gray-500" />

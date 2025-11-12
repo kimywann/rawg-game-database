@@ -1,7 +1,4 @@
-import { Suspense } from "react";
-
 import { ErrorBoundary } from "@/components/common/ErrorBoundary";
-import { Skeleton } from "@/components/common/Skeleton";
 import InfiniteScrollWrapper from "@/components/common/InfiniteScrollWrapper";
 
 export default async function BestOfTheYearPage() {
@@ -16,9 +13,7 @@ export default async function BestOfTheYearPage() {
         <section className="w-full">
           <div className="mt-6 lg:mt-10">
             <ErrorBoundary>
-              <Suspense fallback={<Skeleton />}>
-                <InfiniteScrollWrapper type="best-of-the-year" />
-              </Suspense>
+              <InfiniteScrollWrapper type="best-of-the-year" />
             </ErrorBoundary>
           </div>
         </section>
